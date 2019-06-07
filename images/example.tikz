@@ -19,8 +19,8 @@
 	},
 	ylabel near ticks,
 	ylabel style={font=\sffamily\small, rotate=-90},
-	width=30cm,
-	height=10cm,
+	width=\textwidth,
+	height=5cm,
 	axis x line=bottom,
 	axis y line=left,
 	enlarge x limits=0.01,
@@ -82,7 +82,7 @@
 		no marks, 
 		ylabel={$\yhat$},
 		legend style={at={(.5,-.5)},anchor=north, line width=1pt, fill=tumblue!10},
-		legend columns=3]	
+		legend columns=5]	
 	
 	\addplot[meadowcolor] table [x=t, y=meadows, col sep=comma] {images/example/proba.csv};
 	\addplot[wbarleycolor, thick] table [x=t, y=winter barley, col sep=comma] {images/example/proba.csv};
