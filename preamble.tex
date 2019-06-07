@@ -1,0 +1,246 @@
+
+
+\usepackage{microtype}
+\usepackage{graphicx}
+%\usepackage{subfigure}
+\usepackage{booktabs} 
+\usepackage{hyperref}
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+%\usepackage[accepted]{icml2019}
+
+
+\setlength{\abovecaptionskip}{5pt plus 3pt minus 2pt}
+%\setcitestyle{numbers,round,citesep={;},aysep={,},yysep={;}}
+
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+%\usepackage{booktabs}
+\setlength{\tabcolsep}{5pt}
+%\usepackage{subcaption}
+\usepackage{tumabbrev}
+
+\usepackage{appendix}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+%\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+
+
+\usepackage[capitalize]{cleveref}
+%\usepackage[square,sort,comma,numbers]{natbib}
+%\usepackage{natbib}
+
+%% this hack seems to be nececessary due to incompatibilities of cvpr template and tikz... -> https://tex.stackexchange.com/questions/398223/tikz-gives-error-command-everyshipouthook-already-defined
+%\makeatletter
+%\@namedef{ver@everyshi.sty}{}
+%\makeatother
+%% hackend
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning, calc,arrows,arrows.meta, fit}
+%\usetikzlibrary{arrows.meta,calc,decorations.markings,math,arrows.meta}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{fillbetween}
+\usepgfplotslibrary{statistics} % provides boxplots
+\usepackage{xfrac}
+
+\usetikzlibrary{shapes,snakes}
+
+\newcommand{\tp}{tp}
+\newcommand{\tn}{tn}
+\newcommand{\fp}{fp}
+\newcommand{\fn}{fn}
+
+
+\usepackage{tumcolors}
+\usepackage{tummath}
+\newcommand{\yhat}{\hat{\V{y}}}
+\newcommand{\ycorrect}{\hat{y}^+}
+\newcommand{\thetadelta}{\V{\Theta}_\delta}
+\newcommand{\biasdelta}{b_\delta}
+\newcommand{\biasclass}{\V{b}_\text{c}}
+\newcommand{\thetaclass}{\V{\Theta}_\text{c}}
+\newcommand{\thetafeat}{\V{\Theta}_\text{feat}}
+\newcommand{\fclass}{f_\text{c}}
+\newcommand{\fdelta}{f_\delta}
+\newcommand{\ffeat}{f_\text{feat}}
+\newcommand{\f}{f}
+
+\newcommand{\rvtime}{T_c} 
+\newcommand{\xuptot}{\M{X}_{\rightarrow t}} 
+\newcommand{\deltauptot}{\delta_{\rightarrow t}} 
+\newcommand{\tstop}{\ensuremath{t_\text{stop}}}
+\newcommand{\meantstop}{\ensuremath{\bar{t}_\text{stop}}}
+\usepackage[super]{nth}
+\usepackage{mathtools}
+
+\definecolor{evalcolor}{HTML}{3F3F3F}
+\definecolor{traincolor}{HTML}{B98951}
+\definecolor{validcolor}{HTML}{3F4BBE}
+
+\colorlet{colortrain}{tumblue}
+\colorlet{colorinfer}{tumblack}
+
+\colorlet{earlinesscolor}{tumblue}
+\colorlet{accuracycolor}{tumorange}
+
+\colorlet{stdcolor}{tumbluelight}
+\colorlet{mediancolor}{tumorange}
+\colorlet{meancolor}{tumblue}
+
+%\colorlet{b1color}{tumdiagramaubergine}
+%\colorlet{b2color}{tumdiagramnavyblue}
+%\colorlet{b3color}{tumdiagramturquoise}
+%\colorlet{b4color}{tumdiagramgreen}
+%\colorlet{b5color}{tumdiagramlimegreen}
+%\colorlet{b6color}{tumdiagramyellow}
+%\colorlet{b7color}{tumdiagramsand}
+%\colorlet{b8color}{tumdiagramredorange}
+%\colorlet{b8Acolor}{tumdiagramred}
+%\colorlet{b9color}{tumblack}
+%\colorlet{b10color}{tumblue}
+%\colorlet{b11color}{tumdiagramdarkred}
+%\colorlet{b12color}{tumorange}
+
+% atmospheric bands
+\colorlet{b1color}{tumblack}%tumdiagramaubergine
+\colorlet{b9color}{tumblack}%tumblack
+\colorlet{b10color}{tumblack}%tumblue
+
+%visisble bands
+\colorlet{b2color}{tumblue}%tumdiagramnavyblue
+\colorlet{b3color}{tumblue}%tumdiagramturquoise
+\colorlet{b4color}{tumblue}%tumdiagramgreen
+
+% near infrared bands
+\colorlet{b5color}{tumdiagramred}%tumdiagramlimegreen
+\colorlet{b6color}{tumdiagramred}%tumdiagramyellow
+\colorlet{b7color}{tumdiagramred}%tumdiagramsand
+\colorlet{b8color}{tumdiagramred}%tumdiagramredorange
+\colorlet{b8Acolor}{tumdiagramred}%tumdiagramred
+
+% SWIR bands
+\colorlet{b11color}{tumorange}%tumdiagramdarkred
+\colorlet{b12color}{tumorange}%tumorange
+
+\colorlet{epsilon0color}{tumorange}
+\colorlet{epsilon1color}{tumblue}
+\colorlet{epsilon10color}{tumblack}
+
+\colorlet{meadowcolor}{tumbluemedium}
+\colorlet{wbarleycolor}{tumbluedark}
+\colorlet{corncolor}{tumorange}
+\colorlet{wheatcolor}{tumgreen}
+\colorlet{sbarleycolor}{tumdiagramred}
+\colorlet{clovercolor}{tumdiagramturquoise}
+\colorlet{triticalecolor}{tumdiagramsand}
+
+\tikzstyle{rnn}=[draw,circle, inner sep=.1em]
+\tikzstyle{norm}=[rounded corners,draw]
+\tikzstyle{annot}=[rounded corners, fill=tumblue!20]
+\tikzstyle{infer}=[-stealth, shorten >=.0em, shorten <=.0em, colorinfer]
+\tikzstyle{loss}=[fill=tumblue!10, rounded corners, font=\small]
+\tikzstyle{grad}=[colortrain]
+
+\newcommand{\ptoffset}{\varepsilon}
+
+\tikzstyle{test} = [thick]
+\tikzstyle{train} = [thin, dotted]
+
+\usepackage[inline]{enumitem}
+\setenumerate{label=(\roman*),itemsep=3pt,topsep=3pt}
+
+ \setlength{\belowcaptionskip}{-10pt}
+%\usepackage{titlesec}
+%\titlespacing{\section}{0pt}{10pt}{3pt}
+
+
+\newcommand{\deltat}{\ensuremath{p_t}}
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/]
+%\tikzexternalize
+\tikzexternaldisable
+
+\usepackage[eulergreek]{sansmath}
+\pgfplotsset{
+	y tick label style={/pgf/number format/.cd,%
+		scaled y ticks = false,
+		set thousands separator={},
+		fixed},
+	x tick label style={/pgf/number format/.cd,%
+		scaled x ticks = false,
+		set decimal separator={,},
+		fixed},
+	tick label style = {font=\scriptsize\sansmath\sffamily},
+	every axis label = {
+		font=\scriptsize\sansmath\sffamily},
+	every axis/.append style={
+		axis lines=left, 
+		enlargelimits, 
+		thick},
+	legend style = {font=\scriptsize\sansmath\sffamily, draw=none, rounded corners, fill opacity=.5, text opacity=1},
+	label style = {font=\scriptsize\sansmath\sffamily},
+	grid style={line width=.1pt, draw=gray!10},
+	major grid style={line width=.2pt,draw=tumgraylight},
+}
+
+\let\tempone\itemize
+\let\temptwo\enditemize
+\renewenvironment{itemize}{\tempone\addtolength{\itemsep}{-.5\baselineskip}}{\temptwo}
+
+\tikzstyle{circ} = [circle, draw=white, fill=tumblue, inner sep=.1em]
+\newcommand{\fcn}{
+	\begin{tikzpicture}[scale=1, rotate=0, baseline=-.25em, inner sep=1pt]
+	\node[circ](a0) at (0,-1){};
+	\node[circ](a1) at (0,0){};
+	\node[circ](a2) at (0,1){};
+	
+	\node[circ](b0) at (1,-0.5){};
+	\node[circ](b1) at (1,0.5){};
+	
+	\draw[-] (a0) -- (b0);
+	\draw[-] (a1) -- (b0);
+	\draw[-] (a2) -- (b0);
+	
+	\draw[-] (a0) -- (b1);
+	\draw[-] (a1) -- (b1);
+	\draw[-] (a2) -- (b1);
+	
+	\end{tikzpicture}
+}
+
+\newcommand{\hidden}[1]{
+	\begin{tikzpicture}[scale=1, baseline=-.25em]	
+	%\draw[step=1.0,black,thin] (0,0) grid (#1,1);
+	\foreach \i in {1,...,#1}{
+		\node[circle, draw=white, fill=tumbluelight, inner sep=.2em] at (\i,0){};
+	}
+	\end{tikzpicture}
+}
+
+\newcommand{\drawvector}[1]{
+	\begin{tikzpicture}[scale=1, baseline=-.25em]	
+	%\draw[step=1.0,black,thin] (0,0) grid (#1,1);
+	\foreach \i in {1,...,#1}{
+		\node[circ, inner sep=.2em] at (\i,0){};
+	}
+	\end{tikzpicture}
+}
+
+
+\tikzstyle{druschdatum} = [thin, star,star points=3, star point ratio=0.5, inner sep=.15em, draw=tumwhite, fill=tumblue]
+
+\newcommand{\druschdatum}{
+\begin{tikzpicture}[scale=2, baseline=-.25em, inner sep=0]
+\node[druschdatum, inner sep=.25em]{};
+\end{tikzpicture}
+}

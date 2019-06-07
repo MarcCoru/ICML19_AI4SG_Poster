@@ -12,6 +12,8 @@
 \usepackage{printlen}
 \uselengthunit{mm}
 
+\input{preamble.tex}
+
 \usepackage[utf8]{inputenc}
 
 \title{
@@ -19,7 +21,7 @@
 	}
 	
 \author{
-	Marc Rußwurm
+	Marc Rußwurm, Romain Tavenard, Sebastien Lefevre, Marco Körner
 	}
 
 \header{
@@ -33,6 +35,75 @@
 
 \hfill
 
+\tikzstyle{box} = [rounded corners=.5em, inner sep=1em]
+\colorlet{earlinesscolor}{tumorange}
+\colorlet{accuracycolor}{tumbluelight}
+
+\vfill
+\begin{tikzpicture}[scale=20]
+
+	\node[box, fill=tumbluedark, text=white, font=\huge, text width=25em](mainbox){Classifying Time Series as {\color{earlinesscolor}\textbf{early}} \color{white} as possible while being {\color{accuracycolor}\textbf{accurate}}};
+	
+	\node[box, above=of mainbox]{\input{images/example.tikz}};
+
+	\node[right=of mainbox, draw=tumblue, text width=25cm]{
+	\begin{table}
+	
+	\scriptsize
+	\hspace{0em}\begin{tabular}{lcccccc}
+	\toprule\small
+	\textbf{$\alpha$} & accuracy & $\meantstop$  & precision & recall & $f_1$ & $\kappa$ \\
+	\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+	.0 & .25 $\pm$ .22 & .10 $\pm$ .17 & .19 $\pm$ .20 & .25 $\pm$ .17 & .16 $\pm$ .20 & .12 $\pm$ .19 \\
+	.2 & .81 $\pm$ .03 & .40 $\pm$ .02 & .70 $\pm$ .01 & .74 $\pm$ .01 & .71 $\pm$ .01 & .71 $\pm$ .04 \\
+	.4 & .80 $\pm$ .09 & .47 $\pm$ .03 & .71 $\pm$ .02 & .74 $\pm$ .01 & .71 $\pm$ .02 & .71 $\pm$ .10 \\
+	.6 & .85 $\pm$ .02 & .88 $\pm$ .07 & .73 $\pm$ .04 & .74 $\pm$ .03 & .73 $\pm$ .03 & .77 $\pm$ .03 \\
+	.8 & .84 $\pm$ .01 & .93 $\pm$ .05 & .72 $\pm$ .02 & .75 $\pm$ .01 & .73 $\pm$ .02 & .76 $\pm$ .02 \\
+	1.0 & .83 $\pm$ .03 & 1.00 $\pm$ .00 & .72 $\pm$ .03 & .75 $\pm$ .01 & .72 $\pm$ .03 & .75 $\pm$ .04 \\
+	\bottomrule
+	\end{tabular}
+%	\caption{Varying the weighting factor $\alpha$ for \emph{early reward} loss formulation (\cref{sec:earlynessreward}).}
+%	\label{tab:alpha}
+	
+	\end{table}
+	};
+
+	\node[above right=of mainbox](node name){\input{images/classboxplots.tikz}};
+	
+	\node[below right=of mainbox]{\input{images/lstmmodel.tikz}};
+	
+	\node[below=of mainbox, text width=25cm](math){
+	
+	
+	\begin{equation*}
+	P(t;\deltauptot) = \deltat \cdot \prod_{\tau=0}^{t-1} 1 - p_\tau \, .
+	\label{eq:pts}
+	\end{equation*}
+	\begin{equation*}
+	\mathcal{L}(\V{x}, \V{y}) = \sum_{t=0}^T P(t;\deltauptot) \mathcal{L}_t(\xuptot, \V{y}) \, .
+	\label{eq:ptloss}
+	\end{equation*}
+	
+	\begin{equation*}
+	\mathcal{L}_t(\xuptot, \V{y} ; \alpha) = \alpha \mathcal{L}_c (\xuptot, \V{y}) - (1 - \alpha)\mathcal{R}_e(t, \ycorrect_t)
+	\label{eq:earlyrewardloss}
+	\end{equation*} 
+	
+	\begin{equation*}
+	\mathcal{R}_e(t, \ycorrect_t) = \ycorrect_t \left(1 - \frac{t}{T}\right) \,.
+	\label{eq:earlyrewardterm}
+	\end{equation*}
+
+	};
+
+	\node[below=of math]{
+	\input{images/backprop_stopping_rule.tikz}
+	\backpropstoppingrulefull
+	};
+	
+\end{tikzpicture}
+\vfill
+
 % footer environment places \hfill and sets fontsize
 \begin{footer}
 	\begin{multicols}{2}
@@ -44,8 +115,10 @@
 	\vfill\columnbreak
 	%right
 		\textbf{Authors} \\
-		Marc Rußwurm \\ (marc.russwurm@tum.de) \\
-		Marco Körner \\ (marco.koerner@tum.de)
+		Marc Rußwurm, Technical University of Munich, Chair of Remote Sensing Technology \\
+		Romain Tavenard, IRISA, LETG-Rennes \\
+		Sebastien Lefevre, UBS IRISA Obelix  \\
+		Marco Körner, Technical University of Munich, Chair of Remote Sensing Technology
 	\vfill
 	\end{multicols}
 \end{footer}

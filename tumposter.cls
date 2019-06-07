@@ -91,14 +91,14 @@
 \renewcommand{\maketitle}{
 	%% header
 	%\colorbox{green}{
-	\begin{minipage}[!t][\headerheight][t]{.7\linewidth}
+	\begin{minipage}[!t][\headerheight][t]{.6\linewidth}
 	 \headersize\color{tumblue}\@header
 	\end{minipage}
 	%}
 	\hfill
 	%\colorbox{red}{
-	\begin{minipage}[t][\headerheight][t]{.3\linewidth}
-	\flushright\includegraphics[width=\tumlogowidth]{logo-blue-TUM}
+	\begin{minipage}[t][\headerheight][t]{.4\linewidth}
+	\flushright\includegraphics[width=16cm]{images/irisa}\hspace{1em}\includegraphics[width=\tumlogowidth]{logo-blue-TUM}
 	\end{minipage}
 	%}
 
