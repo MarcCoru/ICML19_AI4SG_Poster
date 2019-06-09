@@ -20,7 +20,7 @@
 	ylabel near ticks,
 	ylabel style={font=\sffamily\small, rotate=-90},
 	width=16cm,
-	height=7cm,
+	height=5cm,
 	axis x line=bottom,
 	axis y line=left,
 	enlarge x limits=0.01,
