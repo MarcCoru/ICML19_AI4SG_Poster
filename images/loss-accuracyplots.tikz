@@ -10,8 +10,9 @@
 	no markers,
 	height=5cm,
 %	legend style={at={(0.03,0.5)},anchor=west},
-	width=\linewidth,
-	xlabel=epochs
+	width=.9\textwidth,
+	xlabel=epochs,
+	ylabel style={yshift=2em}
  	]
 	\nextgroupplot[legend columns=3, ylabel=loss]
 
@@ -35,7 +36,7 @@
 			0 ({\color{earlinesscolor} jan}),
 			0.5 ({\color{earlinesscolor} jun}),
 			1 ({\color{earlinesscolor} dec})},
-		ylabel=accuracy/$\meantstop$]
+		ylabel={\color{tumorange}accuracy}/\color{tumblue}$\meantstop$]
 	\addplot[test, accuracycolor] table [x=epoch, y=accuracy, col sep=comma] {\datapath/log_earliness_test.csv};
 	\addplot[test, earlinesscolor] table [x=epoch, y=earliness, col sep=comma] {\datapath/log_earliness_test.csv};
 

@@ -21,7 +21,7 @@
 	}
 	
 \author{
-	Marc Rußwurm, Romain Tavenard, Sebastien Lefevre, Marco Körner
+	Marc Rußwurm\footnotemark[1], Romain Tavenard\footnotemark[2], Sébastien Lefèvre\footnotemark[2], Marco Körner\footnotemark[1]
 	}
 
 \header{
@@ -33,30 +33,37 @@
 \begin{document}
 \maketitle
 
+\renewcommand{\subsection}[1]{\textbf{#1}}
+
 \begin{minipage}[t]{.65\textwidth}
 	
 	\section{Objective}
 	
 	
-	\begin{tikzpicture}[scale=17]
+	\begin{tikzpicture}[scale=16.8]
 	\node[label={[name=sat,text height=1.5ex,text depth=.25ex]Satellite Data}, anchor=north](x) at (-1,0){$\M{X} = (\V{x}_0, \V{x}_1, \dots , \V{x}_T)$};
-	\node[below=of x, label={[yshift=1.3em, xshift=1.8em, font=\tiny, text=white]below:ESA Sentinel 2 Satellite}](s2){\includegraphics[width=10cm]{images/sentinel2}};
+	\node[below=of x, label={[yshift=1.3em, xshift=1.8em, font=\tiny, text=white]below:ESA Sentinel 2 Satellite}](s2){\includegraphics[width=11cm]{images/sentinel2}};
 	
 	
-	\node[below=of s2, text width=13cm](eqbox){
-		
-		is continuously collected in regular temporal intervals.
+	\node[below=0em of s2, text width=11cm](eqbox){
+		\small
+		\begin{itemize}
+			\item collected at regular temporal intervals of 2-3 days
+			\item measurements of 13 spectral bands
+			\item data available globalls
+		\end{itemize} 
 	};
 	
-	\node[label={[name=cm,text height=1.5ex,text depth=.25ex]{\color{ecolor}Early} {\color{ccolor}Classification} Model}, anchor=north](f) at (0,0){ $\yhat, {\color{tumbluedark}\deltat} = f(\xuptot)$};
-	\node[below=of f](example){\input{images/example.tikz}};
+	\node[label={[name=cm,text height=1.5ex,text depth=.25ex]{Early} {Classification} Model}, anchor=north](f) at (0,0){ $\yhat, {\color{tumbluedark}\deltat} = f(\xuptot)$};
+%	\node[below=of f](example){\input{images/example.tikz}};
+	\node[circle, below=of f, text width=11cm, fill=tumbluedark, text=white](example){Classifying a satellite time series {\color{tumbluelight}\textbf{accurately}} \color{white} as {\color{ecolor}\textbf{early}} \color{white} as possible};
 	
 	
 	\node[label={[name=ctm,text height=1.5ex,text depth=.25ex]Crop Type Labels}, anchor=north](y) at (1,0){
 		$\V{y} = \small (y_\text{corn}, y_\text{barley}, \dots) \in \mathbb{R}^{13}$
 	};
-	\node[below=of y, label=below:IGN crop type labels](labels){\includegraphics[width=9cm]{images/parcels}};
-	\node[below=of labels, text width=9cm](lbls){
+	\node[below=of y, label=below:crop type labels](labels){\includegraphics[width=11cm]{images/parcels}};
+	\node[below=of labels, text width=11cm](lbls){
 		\small
 		\begin{itemize}\setlength\itemsep{.1em}
 		\item European Common Agricultural Policy (CAP)
@@ -67,13 +74,13 @@
 		\end{itemize}
 	};
 	
-	\draw[thin, -{Stealth[scale=.5]}, tumblue] (x) -- (f);
-	\draw[thin, -{Stealth[scale=.5]}, tumblue] (f) -- (y);
+	\draw[very thick, -{Stealth[scale=.5]}, tumblue] (x) -- (f);
+	\draw[very thick, -{Stealth[scale=.5]}, tumblue] (f) -- (y);
 	
 	\scoped[on background layer]
 	{
 		\node[fit=(ctm)(lbls), fill=tumbluelight!20, inner sep=1em, rounded corners]{};
-%		\node[fit=(cm)(foodsec), fill=tumorange!20, inner sep=1em, rounded corners]{};
+		\node[fit=(f)(example)(cm), fill=tumorange!20, inner sep=1em, rounded corners]{};
 		\node[fit=(sat)(eqbox), fill=tumbluelight!20, inner sep=1em, rounded corners]{};
 	}	
 	
@@ -82,8 +89,8 @@
 	
 	\section{Method}
 	
+	Based on previous work (Rußwurm et al., 2019) applied to crop type mapping from remote sensing data.
 	
-%	
 	%A network output to indicate a probability of stopping $\deltat$
 	
 	\begin{minipage}[t]{.49\textwidth}
@@ -145,25 +152,61 @@
 	
 	\end{minipage}
 
+	{\tiny 
+	Rußwurm, M., Lefèvre, S., Courty, N., Emonet, R., Körner, M., and Tavenard, R. End-to-end learning for early classification of time series. arXiv preprint arXiv:1901.10681, 2019.
+	\par
+	}
 
 	
 	\section{Application}
-	Early Crop Type Identification in Agriculture
 	
+	\begin{minipage}[t]{.5\textwidth}
+	\subsection{Agriculture}
+	
+	\begin{itemize}
+		\item early assessment of cultivated crops
+		\item completely end-to-end trainable
+		\item can be applied globally without region-specific expert knowledge
+		\item basis for early crop yield estimation
+		\item method generalizes to other time series applications
+	\end{itemize}
+
+	\end{minipage}
+	\begin{minipage}[t]{.5\textwidth}
+	\subsection{Dataset and Area of Interest}
+	
+	49 000 field parcels of 6 main crop types covering 40 by 30 kilometer in central Germany.
+	
+%	\column{.6\textwidth}
+
+%	\begin{minipage}[t]{.49\textwidth}
+		\input{images/partition_histograms.tikz}
+%		\vspace{-4em}\includegraphics[width=.3\textwidth]{images/holl.pdf}
+%	\end{minipage}
+%	\begin{minipage}[t]{.49\textwidth}
+%%		\input{images/partition_histograms.tikz}
+%		\includegraphics[width=.9\textwidth]{images/holl.pdf}
+%	\end{minipage}
+	
+	\end{minipage}
+
 \end{minipage}
 \hfill
 \begin{minipage}[t]{.32\textwidth}
 	\section{Results}
 	
-	\input{images/loss-accuracyplots.tikz}
-	\figearlyreward
-
 	\subsection{Qualitative Example}
 	
+	\input{images/example.tikz}
 	
+	\subsection{Losses during Training}
 	
-	\subsection{Parameterizing stopping times during training}
+	The combined loss $L_t$, as well as earliness $L_e$ and accuracy $L_e$ losses during training.
 	
+	\input{images/loss-accuracyplots.tikz}
+	\figearlyreward
+	
+	\subsection{Stopping rules learned for each Class}
 	
 	\input{images/trainingstoppingclasses.tikz}
 	
@@ -183,34 +226,54 @@
 			1.0 & .83 $\pm$ .03 & 1.00 $\pm$ .00 & .72 $\pm$ .03 & .75 $\pm$ .01 & .72 $\pm$ .03 & .75 $\pm$ .04 \\
 			\bottomrule
 		\end{tabular}
+	
+		experiments varying the trade-off factor $\alpha$ and observing the achieved earliness and accuracy.
+	
 		%	\caption{Varying the weighting factor $\alpha$ for \emph{early reward} loss formulation (\cref{sec:earlynessreward}).}
 		%	\label{tab:alpha}
 		
 	\end{table}
 	
-	\subsection{Classboxplots}
 	
+	\subsection{Extracting Vegetation Characteristics}
+	
+	Stopping time grouped per crop category 
 	\input{images/classboxplots.tikz}
+	
+%	\tiny
+%	\bibliographystyle{icml2019}
+%	\bibliography{bib/references.bib}
+%	
 	
 \end{minipage}
 
-% footer environment places \hfill and sets fontsize
 \begin{footer}
-	\begin{multicols}{2}
-		\textbf{Technical University of Munich}\\
-		TUM Department of Civil, Geo and Environmental Engineering \\
-		Remote Sensing Technology, Computer Vision Research Group \\
-		Arcisstr. 21, 80333 Munich, Germany \\
+	\begin{minipage}{.33\textwidth}
+		\textbf{Technical University of Munich}\footnotemark[1]\\
+		TUM Department of Civil, Geo and Env. Engineering \\
+		Remote Sensing Technology \\
+		Arcisstr. 21, 80333 Munich, Germany
+	\end{minipage}
+	\begin{minipage}{.33\textwidth}
+		\textbf{IRISA-Obelix}\footnotemark[2]\\
+		Université Bretagne Sud \\
+		IRISA, UMR 6074 CNRS \\
+		Campus de Tohannic, 56000 Vannes, France
+		
+	\end{minipage}
+	\begin{minipage}{.23\textwidth}
+		\textbf{Data \& Code} \\
+		%		\vspace{1em}
+		{https://github.com/rtavenar/early\_rnn} \\
+		{https://twitter.com/MarcCoru} \\
 		www.lmf.bgu.tum.de/vision
-	\vfill\columnbreak
-	%right
-		\textbf{Authors} \\
-		Marc Rußwurm, Technical University of Munich, Chair of Remote Sensing Technology \\
-		Romain Tavenard, IRISA, LETG-Rennes \\
-		Sebastien Lefevre, UBS IRISA Obelix  \\
-		Marco Körner, Technical University of Munich, Chair of Remote Sensing Technology
-	\vfill
-	\end{multicols}
+	\end{minipage}
+	\begin{minipage}{.10\textwidth}
+		\hfill\includegraphics[width=5cm]{images/qr-code}\\
+		
+	\end{minipage}
+	
+	
 \end{footer}
 
 \end{document}

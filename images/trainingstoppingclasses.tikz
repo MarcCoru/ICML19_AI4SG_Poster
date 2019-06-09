@@ -4,12 +4,12 @@
 \begin{tikzpicture}
 	\begin{groupplot}[
 	group style = {
-		group size = 1 by 4,
+		group size = 1 by 2,
 		x descriptions at=edge bottom,
 		vertical sep=.75em},
 	title style={
 		font=\sffamily\scriptsize,
-		at={(0,1)},
+		at={(0,1.1)},
 		anchor=north west
 	},
 	ymajorgrids,
@@ -21,6 +21,7 @@
 	ymax=1.1,
 	ymin=0.3,
 	ylabel=$\tstop$,
+	ylabel style={yshift=1em},
 	ytick={0,0.25,0.5,0.75,1},
 	yticklabels={Jan,Apr,Jun,Sep,Dec}
 	]
@@ -40,20 +41,20 @@
 	\addplot+[name path=lower, draw=none] table [x=epoch, y=winter barley, col sep=comma] {\datapath/mean-std.csv};
 	\addplot[stdcolor] fill between[of=lower and upper];
 	
-	\nextgroupplot[title=corn]
-	\addplot[meancolor] table [x=epoch, y=corn, col sep=comma] {\datapath/mean.csv};
-	\addplot[mediancolor] table [x=epoch, y=corn, col sep=comma] {\datapath/median.csv};
-	\addplot+[name path=upper, draw=none] table [x=epoch, y=corn, col sep=comma] {\datapath/mean+std.csv};
-	\addplot+[name path=lower, draw=none] table [x=epoch, y=corn, col sep=comma] {\datapath/mean-std.csv};
-	\addplot[stdcolor] fill between[of=lower and upper];
-	
-	\nextgroupplot[title=winter wheat]
-	\addplot[meancolor] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean.csv};
-	\addplot[mediancolor] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/median.csv};
-	\addplot+[name path=upper, draw=none] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean+std.csv};
-	\addplot+[name path=lower, draw=none] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean-std.csv};
-	\addplot[stdcolor] fill between[of=lower and upper];
-	
+%	\nextgroupplot[title=corn]
+%	\addplot[meancolor] table [x=epoch, y=corn, col sep=comma] {\datapath/mean.csv};
+%	\addplot[mediancolor] table [x=epoch, y=corn, col sep=comma] {\datapath/median.csv};
+%	\addplot+[name path=upper, draw=none] table [x=epoch, y=corn, col sep=comma] {\datapath/mean+std.csv};
+%	\addplot+[name path=lower, draw=none] table [x=epoch, y=corn, col sep=comma] {\datapath/mean-std.csv};
+%	\addplot[stdcolor] fill between[of=lower and upper];
+%	
+%	\nextgroupplot[title=winter wheat]
+%	\addplot[meancolor] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean.csv};
+%	\addplot[mediancolor] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/median.csv};
+%	\addplot+[name path=upper, draw=none] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean+std.csv};
+%	\addplot+[name path=lower, draw=none] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean-std.csv};
+%	\addplot[stdcolor] fill between[of=lower and upper];
+%	
 %	\nextgroupplot[title=summer barley]
 %	\addplot[meancolor] table [x=epoch, y=summer barley, col sep=comma] {\datapath/mean.csv};
 %	\addplot[mediancolor] table [x=epoch, y=summer barley, col sep=comma] {\datapath/median.csv};

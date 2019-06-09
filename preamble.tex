@@ -9,7 +9,7 @@
 %\usepackage[accepted]{icml2019}
 
 
-\setlength{\abovecaptionskip}{5pt plus 3pt minus 2pt}
+%\setlength{\abovecaptionskip}{5pt plus 3pt minus 2pt}
 %\setcitestyle{numbers,round,citesep={;},aysep={,},yysep={;}}
 
 \usepackage{times}
@@ -19,7 +19,7 @@
 \usepackage{amssymb}
 \usepackage[utf8]{inputenc}
 %\usepackage{booktabs}
-\setlength{\tabcolsep}{5pt}
+%\setlength{\tabcolsep}{5pt}
 %\usepackage{subcaption}
 \usepackage{tumabbrev}
 
@@ -37,7 +37,7 @@
 
 \usepackage[capitalize]{cleveref}
 %\usepackage[square,sort,comma,numbers]{natbib}
-%\usepackage{natbib}
+\usepackage{natbib}
 
 %% this hack seems to be nececessary due to incompatibilities of cvpr template and tikz... -> https://tex.stackexchange.com/questions/398223/tikz-gives-error-command-everyshipouthook-already-defined
 %\makeatletter
@@ -170,7 +170,7 @@
 \usepackage[inline]{enumitem}
 \setenumerate{label=(\roman*),itemsep=3pt,topsep=3pt}
 
- \setlength{\belowcaptionskip}{-10pt}
+% \setlength{\belowcaptionskip}{-10pt}
 %\usepackage{titlesec}
 %\titlespacing{\section}{0pt}{10pt}{3pt}
 
@@ -205,9 +205,9 @@
 	major grid style={line width=.2pt,draw=tumgraylight},
 }
 
-\let\tempone\itemize
-\let\temptwo\enditemize
-\renewenvironment{itemize}{\tempone\addtolength{\itemsep}{-.5\baselineskip}}{\temptwo}
+%\let\tempone\itemize
+%\let\temptwo\enditemize
+%\renewenvironment{itemize}{\tempone\addtolength{\itemsep}{-.5\baselineskip}}{\temptwo}
 
 
 \tikzstyle{circ} = [circle, draw=white, fill=tumblue, inner sep=.08em]
