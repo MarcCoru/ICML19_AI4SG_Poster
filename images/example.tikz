@@ -1,8 +1,8 @@
 \tikzsetnextfilename{example}
 \begin{tikzpicture}[rounded corners=0pt]
 	
-	\tikzstyle{annot} = [font=\tiny\sffamily, text=tumblue]
-	\tikzstyle{point} = [thin, tumbluelight, shorten >= .25em, shorten <= .25em]
+	\tikzstyle{annot} = [font=\verytiny\sffamily, text=tumblue]
+	\tikzstyle{point} = [very thin, tumbluelight, shorten >= .25em, shorten <= .25em]
 	
 	% from /home/marc/projects/EV2019/images/example/tstop.txt
 	\def\tstopv{0.6285714285714286}
@@ -19,8 +19,8 @@
 	},
 	ylabel near ticks,
 	ylabel style={font=\sffamily\small, rotate=-90},
-	width=\textwidth,
-	height=5cm,
+	width=16cm,
+	height=7cm,
 	axis x line=bottom,
 	axis y line=left,
 	enlarge x limits=0.01,
@@ -30,7 +30,7 @@
 	ymin=0, ymax=1.4
 	]
 	
-	\nextgroupplot[thin,
+	\nextgroupplot[very thin,
 		no marks,  
 		ylabel={$\V{x}$},
 		draw opacity=.8,
@@ -70,19 +70,19 @@
 	\draw[point] (glab) -- (axis cs:.21,.3);
 	\draw[point] (glab) -- (axis cs:.7,.3);
 	
-	\draw (axis cs:\tstopv,0) -- (axis cs:\tstopv,1) node[above]{$\tstop(\deltat)$};
+	\draw (axis cs:\tstopv,0) -- (axis cs:\tstopv,1) node[above, font=\tiny]{$\tstop(\deltat)$};
 	
 	
 	
 	\legend{3 atmospheric bands, 2 short-wave infrared bands, 5 near infrared bands, 3 visible bands (RGB)}
 	
 	
-	\nextgroupplot[thin,
+	\nextgroupplot[very thin,
 		smooth,
 		no marks, 
 		ylabel={$\yhat$},
-		legend style={at={(.5,-.5)},anchor=north, line width=1pt, fill=tumblue!10},
-		legend columns=5]	
+		legend style={at={(.5,-.5)},anchor=north, line width=1pt, fill=tumblue!10, font=\scriptsize},
+		legend columns=2]	
 	
 	\addplot[meadowcolor] table [x=t, y=meadows, col sep=comma] {images/example/proba.csv};
 	\addplot[wbarleycolor, thick] table [x=t, y=winter barley, col sep=comma] {images/example/proba.csv};
@@ -124,7 +124,7 @@
 	
 	\end{groupplot}
 	
-	\node[font=\sffamily\tiny, anchor=west] at (-.4,3.3) {All 13 spectral bands of the Sentinel 2 satellites grouped by spectral signature};
-	\node[font=\sffamily\tiny, anchor=west] at (0,-3.1) {predicted crop type classes (correct class in \textbf{bold})};
-	
+%	\node[font=\sffamily\tiny, anchor=west] at (-.4,3.3) {All 13 spectral bands of the Sentinel 2 satellites grouped by spectral signature};
+%	\node[font=\sffamily\tiny, anchor=west] at (0,-3.1) {predicted crop type classes (correct class in \textbf{bold})};
+%	
 	\end{tikzpicture}

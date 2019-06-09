@@ -38,9 +38,9 @@
 	\section{Objective}
 	
 	
-	\begin{tikzpicture}[scale=16]
+	\begin{tikzpicture}[scale=17]
 	\node[label={[name=sat,text height=1.5ex,text depth=.25ex]Satellite Data}, anchor=north](x) at (-1,0){$\M{X} = (\V{x}_0, \V{x}_1, \dots , \V{x}_T)$};
-	\node[below=of x, label={[yshift=1.3em, xshift=1.8em, font=\tiny, text=white]below:ESA Sentinel 2 Satellite}](s2){\includegraphics[width=13cm]{images/sentinel2}};
+	\node[below=of x, label={[yshift=1.3em, xshift=1.8em, font=\tiny, text=white]below:ESA Sentinel 2 Satellite}](s2){\includegraphics[width=10cm]{images/sentinel2}};
 	
 	
 	\node[below=of s2, text width=13cm](eqbox){
@@ -48,21 +48,22 @@
 		is continuously collected in regular temporal intervals.
 	};
 	
-	\node[label={[name=cm,text height=1.5ex,text depth=.25ex]{\color{ecolor}Early} {\color{ccolor}Early} Model}, anchor=north](f) at (0,0){ $\V{y}, {\color{tumbluedark}\deltat} = f(\M{x})$};
+	\node[label={[name=cm,text height=1.5ex,text depth=.25ex]{\color{ecolor}Early} {\color{ccolor}Classification} Model}, anchor=north](f) at (0,0){ $\yhat, {\color{tumbluedark}\deltat} = f(\xuptot)$};
+	\node[below=of f](example){\input{images/example.tikz}};
 	
 	
 	\node[label={[name=ctm,text height=1.5ex,text depth=.25ex]Crop Type Labels}, anchor=north](y) at (1,0){
 		$\V{y} = \small (y_\text{corn}, y_\text{barley}, \dots) \in \mathbb{R}^{13}$
 	};
-	\node[below=of y, label=below:IGN crop type labels](labels){\includegraphics[width=13cm]{images/parcels}};
-	\node[below=of labels, text width=12cm](lbls){
+	\node[below=of y, label=below:IGN crop type labels](labels){\includegraphics[width=9cm]{images/parcels}};
+	\node[below=of labels, text width=9cm](lbls){
 		\small
 		\begin{itemize}\setlength\itemsep{.1em}
 		\item European Common Agricultural Policy (CAP)
 		\item collected yearly in entire Europe
-		\item slowly made publicly available
-		\item today, gathered on a national basis
-		\item in future harmonized within Europe's INSPIRE directive
+%		\item slowly made publicly available
+%		\item today, gathered on a national basis
+%		\item in future harmonized within Europe's INSPIRE directive
 		\end{itemize}
 	};
 	
@@ -81,39 +82,73 @@
 	
 	\section{Method}
 	
-	\begin{tikzpicture}[xscale=20]
 	
-		\node[fill=tumbluelight!20, rounded corners] at (0,0){
-			\input{images/backprop_stopping_rule.tikz}
-			\backpropstoppingrulefull
-		};
+%	
+	%A network output to indicate a probability of stopping $\deltat$
+	
+	\begin{minipage}[t]{.49\textwidth}
+		\subsection{Mechanism}
 		
-		\node[text width=25cm, fill=tumbluelight!20, rounded corners](math) at (1,0){
-			
-			
-			\begin{equation*}
-			P(t;\deltauptot) = \deltat \cdot \prod_{\tau=0}^{t-1} 1 - p_\tau \, .
-			\label{eq:pts}
-			\end{equation*}
-			\begin{equation*}
-			\mathcal{L}(\V{x}, \V{y}) = \sum_{t=0}^T P(t;\deltauptot) \mathcal{L}_t(\xuptot, \V{y}) \, .
-			\label{eq:ptloss}
-			\end{equation*}
-			
-			\begin{equation*}
-			\mathcal{L}_t(\xuptot, \V{y} ; \alpha) = \alpha \mathcal{L}_c (\xuptot, \V{y}) - (1 - \alpha)\mathcal{R}_e(t, \ycorrect_t)
-			\label{eq:earlyrewardloss}
-			\end{equation*} 
-			
-			\begin{equation*}
-			\mathcal{R}_e(t, \ycorrect_t) = \ycorrect_t \left(1 - \frac{t}{T}\right) \,.
-			\label{eq:earlyrewardterm}
-			\end{equation*}
-			
-		};
+		\input{images/backprop_stopping_rule.tikz}
+		\backpropstoppingrulefull
 		
+%	\begin{tikzpicture}
+%		\node[fill=tumbluelight!20, rounded corners](a) at (0,0){
+%						\input{images/backprop_stopping_rule.tikz}
+%						\backpropstoppingrulefull
+%					};
+%		\node[right=of a]{\input{images/qualitative_example.tikz}};
+%	\end{tikzpicture}
+%	\vspace{-10em}
+
+%	probability of not having classified before (known at training time)
+%	$$P(t) = \deltat \cdot \prod_{\tau=0}^{t-1} 1 - p_\tau$$
+
+	
+
+	\end{minipage}
+	\begin{minipage}[t]{.49\textwidth}
+		
+	
+	\subsection{Loss function}
+	
+	composite loss function
+	$$\mathcal{L}(\V{x}, \V{y}) = \sum_{t=0}^T P(t;\deltauptot) \mathcal{L}_t(\xuptot, \V{y})$$
+	
+	
+	A Loss function including accuracy and earliness
+	
+	\begin{tikzpicture}[node distance=-.5em, draw=tumbluelight, rounded corners]
+	
+	%	\node(allloss){$\mathcal{L}(\V{x}, \V{y}) = \sum_{t=0}^T P(t;\deltauptot) \mathcal{L}_t(\xuptot, \V{y})$};
+	%	
+	\node(loss){$\mathcal{L}_t(\xuptot, \V{y} ; \alpha)$};
+	\node[right=of loss](equals){$=$};
+	\node[right=of equals, fill=accuracycolor!20, rounded corners, label={[font=\small]Classification Loss}](classificationloss){$\alpha \mathcal{L}_c (\xuptot, \V{y})$};
+	\node[right=of classificationloss](minus){$-$};
+	\node[right=of minus, fill=earlinesscolor!20, rounded corners, label={[font=\small]Earliness Reward}](earlinessreward){$(1 - \alpha)\mathcal{R}_e(t, \ycorrect_t)$};
+	
+	\node[below=1em of classificationloss, text width=10cm, xshift=-4em](clossexp){$\mathcal{L}_c = -\log(\ycorrect_t)$ \\
+		\vspace{.5em} 
+		\tiny
+		cross entropy loss for accurate classifications \par};
+	
+	\node[below=1em of earlinessreward, text width=13cm, xshift=-2em](erewardexp){$\mathcal{R}_e(t, \ycorrect_t) = \ycorrect_t \left(1 - \frac{t}{T}\right)$ \\
+		\vspace{.5em}
+		\tiny
+		reduces loss for earlier classifications $1-\frac{t}{T}$ if the correct class $\ycorrect_t$ has been predicted with a high score \par};
+	
+	\draw[thick] (classificationloss) -- (clossexp);
+	\draw[thick] (earlinessreward) -- (erewardexp);
 	\end{tikzpicture}
 	
+	
+	\end{minipage}
+
+
+	
+	\section{Application}
+	Early Crop Type Identification in Agriculture
 	
 \end{minipage}
 \hfill
@@ -126,7 +161,6 @@
 	\subsection{Qualitative Example}
 	
 	
-	\input{images/example.tikz}
 	
 	\subsection{Parameterizing stopping times during training}
 	

@@ -88,7 +88,7 @@
 \definecolor{traincolor}{HTML}{B98951}
 \definecolor{validcolor}{HTML}{3F4BBE}
 
-\colorlet{colortrain}{tumblue}
+\colorlet{colortrain}{tumdiagramred}
 \colorlet{colorinfer}{tumblack}
 
 \colorlet{earlinesscolor}{tumblue}
@@ -100,6 +100,13 @@
 
 \colorlet{ecolor}{tumorange}
 \colorlet{ccolor}{tumblue}
+
+
+\colorlet{colorclassone}{tumblue}
+\colorlet{colorclasstwo}{tumblack}
+\colorlet{colorclassthree}{tumgreen}
+\colorlet{colorclassfour}{tumorange}
+\colorlet{colorblue}{tumblue}
 
 %\colorlet{b1color}{tumdiagramaubergine}
 %\colorlet{b2color}{tumdiagramnavyblue}
@@ -151,9 +158,9 @@
 \tikzstyle{rnn}=[draw,circle, inner sep=.1em]
 \tikzstyle{norm}=[rounded corners,draw]
 \tikzstyle{annot}=[rounded corners, fill=tumblue!20]
-\tikzstyle{infer}=[-stealth, shorten >=.0em, shorten <=.0em, colorinfer]
-\tikzstyle{loss}=[fill=tumblue!10, rounded corners, font=\small]
-\tikzstyle{grad}=[colortrain]
+\tikzstyle{infer}=[-{stealth[scale=10]}, shorten >=.0em, shorten <=.0em, colorinfer, thick]
+\tikzstyle{loss}=[fill=tumblue!10, rounded corners, font=\small, thick]
+\tikzstyle{grad}=[colortrain, thick]
 
 \newcommand{\ptoffset}{\varepsilon}
 
@@ -202,9 +209,10 @@
 \let\temptwo\enditemize
 \renewenvironment{itemize}{\tempone\addtolength{\itemsep}{-.5\baselineskip}}{\temptwo}
 
-\tikzstyle{circ} = [circle, draw=white, fill=tumblue, inner sep=.1em]
+
+\tikzstyle{circ} = [circle, draw=white, fill=tumblue, inner sep=.08em]
 \newcommand{\fcn}{
-	\begin{tikzpicture}[scale=1, rotate=0, baseline=-.25em, inner sep=1pt]
+	\begin{tikzpicture}[scale=.5, rotate=0, baseline=-.25em, inner sep=1pt]
 	\node[circ](a0) at (0,-1){};
 	\node[circ](a1) at (0,0){};
 	\node[circ](a2) at (0,1){};
@@ -224,23 +232,22 @@
 }
 
 \newcommand{\hidden}[1]{
-	\begin{tikzpicture}[scale=1, baseline=-.25em]	
+	\begin{tikzpicture}[scale=.1, baseline=-.25em]	
 	%\draw[step=1.0,black,thin] (0,0) grid (#1,1);
 	\foreach \i in {1,...,#1}{
-		\node[circle, draw=white, fill=tumbluelight, inner sep=.2em] at (\i,0){};
+		\node[circle, draw=white, fill=tumbluelight, inner sep=1pt] at (\i,0){};
 	}
 	\end{tikzpicture}
 }
 
 \newcommand{\drawvector}[1]{
-	\begin{tikzpicture}[scale=1, baseline=-.25em]	
+	\begin{tikzpicture}[scale=.1, baseline=-.25em]	
 	%\draw[step=1.0,black,thin] (0,0) grid (#1,1);
 	\foreach \i in {1,...,#1}{
-		\node[circ, inner sep=.2em] at (\i,0){};
+		\node[circ] at (\i,0){};
 	}
 	\end{tikzpicture}
 }
-
 
 \tikzstyle{druschdatum} = [thin, star,star points=3, star point ratio=0.5, inner sep=.15em, draw=tumwhite, fill=tumblue]
 

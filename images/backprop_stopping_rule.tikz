@@ -1,42 +1,76 @@
 \newcommand{\backpropstoppingrulefull}{
 \tikzsetnextfilename{backprop_stopping_rule}
-\begin{tikzpicture}[node distance=1em and 1em]
-\node[](x0){$x_t$};
-\node[rnn, below=of x0](h0){$h_t$};  %$\theta_\text{rnn}$};
-\node[below right= 2em and 1em of h0](y0){$\yhat_t$};
-\node[rnn, left=2em of h0,draw=lightgray](hprev){};
-\node[rnn, right=2em of h0,draw=lightgray](hnext){};
-\node[below left= 2em and 1em of h0](d0){$\delta_t$};
 
-\node[loss, below=of y0](L0){$\mathcal{L}_c (\xuptot, y)$};
+\begin{tikzpicture}[node distance=1em and 1em]
+\node[](x0){$\V{x}_t$};
+\node[rnn, below=of x0](h0){$\V{h}_t$};  %$\theta_\text{rnn}$};
+\node[below right= 2em and 1em of h0](y0){$\yhat_t$};
+\node[left=1.1em of x0,text=tumgraydark](xprev){$\V{x}_{t-1}$};
+\node[right=1.5em of x0,text=tumgraydark](xnext){$\V{x}_{t}$};
+\node[rnn, left=1.5em of h0,draw=tumgray](hprev){\phantom{$h_t$}};
+\node[rnn, right=1.5em of h0,draw=tumgray](hnext){\phantom{$h_t$}};
+\node[below left= 2em and 1em of h0](d0){$\deltat$};
+
+\node[loss, below=of y0](L0){$\mathcal{L}_c$}; % -1em
 %\node[right=of L0](t0){$\V{y}_t$};
 \draw[-stealth, grad] (y0) -- (L0);
 %\draw[-stealth, grad] (t0) -- (L0);
 
+\draw[infer, draw=tumgray] (xprev) -- (hprev);
+\draw[infer, draw=tumgray] (xnext) -- (hnext);
+
 \draw[infer] (x0) -- (h0);
-\draw[infer,draw=lightgray] (hprev) -- (h0);
-\draw[infer,draw=lightgray] (h0) -- (hnext);
+\draw[infer,draw=tumgray] (hprev) -- (h0);
+\draw[infer,draw=tumgray] (h0) -- (hnext);
 \draw[infer] (h0) -- (y0) node[midway,right, text=black](wc){$\theta_{cl}$};
-\draw[infer] (h0) -- (d0) node[midway,left, text=black](wd){$\theta_{\delta}$};
+\draw[infer] (h0) -- (d0) node[midway,left, text=black](wd){$\theta_{p}$};
 
 \draw[-stealth, grad] (L0) to [bend right=30] node[near end, right, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial\theta_\text{cl}}$}
 (wc);
 
 \node[below=of d0](pt){$P(t)$};
-\node[below=8em of h0, loss](L){$\mathcal{L}_t(\xuptot, y ; \alpha)$}; % = P(t)\mathcal{L}_c (\xuptot, y)$};
+\node[below=8em of h0, loss](L){$\mathcal{L}_t$}; % = P(t)\mathcal{L}_c (\xuptot, y)$}; (\xuptot, y ; \alpha)
 
-\node[left=.5em of pt](budget){$\mathcal{B}_{t-1}$};
+%\node[left=.5em of pt](budget){$P(t;\deltauptot)$};
 
 \draw[infer] (L0) -- (L);
 \draw[infer] (d0) -- (pt);
 \draw[infer] (pt) -- (L);
-\draw[infer] (budget) -- (pt);
+%\draw[infer] (budget) -- (pt);
 
 \draw[-stealth, grad] (L) to [bend right=30] node[midway, right, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial\mathcal{L}_c}$}(L0);
 
 \draw[-stealth, grad] (L) to [bend left=30] node[midway, left, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial P(t)}$}(pt);
 
-\draw[-stealth, grad] (pt) to [bend left=30] node[midway, left, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial \theta_{\delta}}$}(wd);
+\draw[-stealth, grad] (pt) to [bend left=30] node[midway, left, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial \theta_{p}}$}(wd);
+
+%\node[left= 3em of h0]{
+%\input{images/lstmmodel.tikz}
+%\lstmmodel
+%};
+
+\node[left=4em of h0, yshift=1em, font=\tiny, text width=5em](annoth0){feature extractor $h_t = f(\xuptot)$ implemented as multi-layer LSTM};
+\draw[tumblue] (annoth0) -- (hprev);
+
+\node[left=3em of d0, yshift=1em, font=\tiny, text width=5em](annotdt){probability of stopping at time $t$};
+\draw[tumblue] (annotdt) -- (d0);
+
+\node[left=2em of pt, yshift=0em, font=\tiny, text width=6em](annotpt){probability of not having stopped before \\
+$P(t) = \deltat \cdot \prod_{\tau=0}^{t-1} 1 - p_\tau$
+};
+\draw[tumblue] (annotpt) -- (pt);
+
+\node[left=4em of L, yshift=0em, font=\tiny, text width=6em](annotL){loss function that allows gradient back-propagation to $\theta_{p}$ and $\theta_{cl}$.
+};
+\draw[tumblue] (annotL) -- (L);
+
+
+
+	\scoped[on background layer]
+{
+	\node[fit=(xprev)(d0)(x0)(y0), fill=tumbluelight!20, inner sep=1em, rounded corners, label={[font=\tiny, rotate=90, anchor=north]right:inference time}]{};
+	\node[fit=(pt)(L)(L0), fill=tumgraylight, inner sep=1em, rounded corners, label={[font=\tiny, rotate=90, anchor=north]right:training time}]{};
+}	
 
 \end{tikzpicture}
 }
