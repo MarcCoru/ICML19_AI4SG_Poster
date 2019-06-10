@@ -2,7 +2,7 @@
 \begin{tikzpicture}[rounded corners=0pt]
 	
 	\tikzstyle{annot} = [font=\verytiny\sffamily, text=tumblue]
-	\tikzstyle{point} = [very thin, tumbluelight, shorten >= .25em, shorten <= .25em]
+	\tikzstyle{point} = [very thin, tumbluelight, shorten >= .01em, shorten <= .01em]
 	
 	% from /home/marc/projects/EV2019/images/example/tstop.txt
 	\def\tstopv{0.6285714285714286}
@@ -17,10 +17,11 @@
 		xticklabels at=edge bottom,
 		vertical sep=1em,
 	},
-	ylabel near ticks,
+%	ylabel near ticks,
+	ylabel style={yshift=.7em, xshift=-.4em},
 	ylabel style={font=\sffamily\small, rotate=-90},
 	width=.9\textwidth,
-	height=5cm,
+	height=6cm,
 	axis x line=bottom,
 	axis y line=left,
 	enlarge x limits=0.01,

@@ -12,6 +12,7 @@
 %	legend style={at={(0.03,0.5)},anchor=west},
 	width=.9\textwidth,
 	xlabel=epochs,
+	xtick={0, 10,...,100},
 	ylabel style={yshift=2em}
  	]
 	\nextgroupplot[legend columns=3, ylabel=loss]
@@ -24,7 +25,7 @@
 	
 %	\legend{total loss (eval), classification loss (eval), earliness reward (eval)}
 %	
-	\legend{$(\mathcal{L}_\text{c} - \mathcal{R}_\text{e})$, $\mathcal{L}_\text{c}$, $\mathcal{R}_\text{e}$}
+	\legend{$\mathcal{L}_\text{t}$, $\mathcal{L}_\text{c}$, $\mathcal{R}_\text{e}$}
 	
 	
 	

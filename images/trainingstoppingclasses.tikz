@@ -16,14 +16,15 @@
 	no markers,
 	height=5cm,
 	legend style={at={(0.5,1)},anchor=south},
-	width=\linewidth,
+	width=.9\textwidth,
 	xlabel=epochs,
 	ymax=1.1,
 	ymin=0.3,
 	ylabel=$\tstop$,
 	ylabel style={yshift=1em},
 	ytick={0,0.25,0.5,0.75,1},
-	yticklabels={Jan,Apr,Jun,Sep,Dec}
+	xtick={0, 10,...,100},
+	yticklabels={jan,apr,jun,sep,dec}
 	]
 	\nextgroupplot[title=meadows, legend columns=3]
 	\addplot[meancolor] table [x=epoch, y=meadows, col sep=comma] {\datapath/mean.csv};

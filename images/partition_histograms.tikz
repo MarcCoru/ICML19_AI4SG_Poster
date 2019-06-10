@@ -4,8 +4,8 @@
   \begin{axis}[
         ybar, axis on top,
         title={},
-        height=6cm, width=\textwidth,
-        bar width=0.2cm,
+        height=6cm, width=.8\textwidth,
+        bar width=0.3cm,
         ymajorgrids, tick align=inside,
         major grid style={draw=tumgraylight},
         enlarge y limits={value=.1,upper},

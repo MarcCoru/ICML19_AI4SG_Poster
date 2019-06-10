@@ -21,7 +21,7 @@
 	}
 	
 \author{
-	Marc Rußwurm\footnotemark[1], Romain Tavenard\footnotemark[2], Sébastien Lefèvre\footnotemark[2], Marco Körner\footnotemark[1]
+	Marc Rußwurm\footnotemark[1], Romain Tavenard\footnotemark[2], Sébastien Lefèvre\footnotemark[2], Marcoa Körner\footnotemark[1]
 	}
 
 \header{
@@ -54,9 +54,19 @@
 		\end{itemize} 
 	};
 	
-	\node[label={[name=cm,text height=1.5ex,text depth=.25ex]{Early} {Classification} Model}, anchor=north](f) at (0,0){ $\yhat, {\color{tumbluedark}\deltat} = f(\xuptot)$};
+	\node[label={[name=cm,text height=1.5ex,text depth=.25ex]{Early} {Classification} Model}, anchor=north](f) at (0,0){ $\yhat_t, {\deltat} = f(\xuptot)$};
+	\node[below=0em of f, text width=13cm, font=\small](info){
+		\begin{description}
+		
+		\item[$\xuptot$] observation until $t$  \\
+		\item[$\yhat_t$] class prediction scores \\
+		\item[$\deltat$] probability of stopping.
+		
+		\end{description}
+		
+	};
 %	\node[below=of f](example){\input{images/example.tikz}};
-	\node[circle, below=of f, text width=11cm, fill=tumbluedark, text=white](example){Classifying a satellite time series {\color{tumbluelight}\textbf{accurately}} \color{white} as {\color{ecolor}\textbf{early}} \color{white} as possible};
+	\node[circle, below=of info, text width=11cm, fill=tumbluedark, text=white](example){Classifying a \\ satellite time series \\ {\color{tumbluelight}\textbf{accurately}} \color{white} as {\color{ecolor}\textbf{early}} \color{white} as possible};
 	
 	
 	\node[label={[name=ctm,text height=1.5ex,text depth=.25ex]Crop Type Labels}, anchor=north](y) at (1,0){
@@ -77,11 +87,14 @@
 	\draw[very thick, -{Stealth[scale=.5]}, tumblue] (x) -- (f);
 	\draw[very thick, -{Stealth[scale=.5]}, tumblue] (f) -- (y);
 	
+	\coordinate(bottomleftcolumn) at (example.south -| s2);
+	\coordinate(bottomrightcolumn) at (example.south -| lbls);
+	
 	\scoped[on background layer]
 	{
-		\node[fit=(ctm)(lbls), fill=tumbluelight!20, inner sep=1em, rounded corners]{};
+		\node[fit=(ctm)(lbls)(bottomrightcolumn), fill=tumbluelight!20, inner sep=1em, rounded corners]{};
 		\node[fit=(f)(example)(cm), fill=tumorange!20, inner sep=1em, rounded corners]{};
-		\node[fit=(sat)(eqbox), fill=tumbluelight!20, inner sep=1em, rounded corners]{};
+		\node[fit=(sat)(eqbox)(bottomleftcolumn), fill=tumbluelight!20, inner sep=1em, rounded corners]{};
 	}	
 	
 	\end{tikzpicture}
@@ -129,7 +142,7 @@
 	
 	%	\node(allloss){$\mathcal{L}(\V{x}, \V{y}) = \sum_{t=0}^T P(t;\deltauptot) \mathcal{L}_t(\xuptot, \V{y})$};
 	%	
-	\node(loss){$\mathcal{L}_t(\xuptot, \V{y} ; \alpha)$};
+	\node(loss){$\mathcal{L}_t(\xuptot, \V{y})$};
 	\node[right=of loss](equals){$=$};
 	\node[right=of equals, fill=accuracycolor!20, rounded corners, label={[font=\small]Classification Loss}](classificationloss){$\alpha \mathcal{L}_c (\xuptot, \V{y})$};
 	\node[right=of classificationloss](minus){$-$};
@@ -163,30 +176,60 @@
 	\begin{minipage}[t]{.5\textwidth}
 	\subsection{Agriculture}
 	
-	\begin{itemize}
-		\item early assessment of cultivated crops
-		\item completely end-to-end trainable
-		\item can be applied globally without region-specific expert knowledge
-		\item basis for early crop yield estimation
-		\item method generalizes to other time series applications
-	\end{itemize}
-
+	\small
+	
+	\vspace{1em}
+	
+		\textbf{Early Crop Detection}
+		\begin{itemize}
+			\item early assessment of cultivated crops
+			\item basis for early crop yield estimation
+		\end{itemize}
+		\vspace{.3em}
+		
+		\textbf{Extraction of Crop Phenology}
+		\begin{itemize}
+			\item extraction of vegetation specific events 
+			\item monitoring time of classification
+			\item regional or temporal variations
+		\end{itemize}
+		\vspace{.3em}
+		
+		\textbf{Generalization}
+		\begin{itemize}
+			\item end-to-end trainable
+			\item applicable globally
+			\item no region-specific expert knowledge
+		\end{itemize}
+	
 	\end{minipage}
-	\begin{minipage}[t]{.5\textwidth}
-	\subsection{Dataset and Area of Interest}
+	\begin{minipage}[t]{.66\textwidth}
+	\subsection{Dataset and Area of Interest} \par
+	\begin{minipage}{.49\textwidth}
+		\small
+		\vspace{1em}
+		Hollfeld region Bavaria
+		\begin{itemize}
+			\item 49k field parcels
+			\item 6 main crop types
+			\item covering 40 by 30 km
+			\item central germany
+		\end{itemize}
+		
+		\vspace{1em}
 	
-	49 000 field parcels of 6 main crop types covering 40 by 30 kilometer in central Germany.
-	
-%	\column{.6\textwidth}
-
-%	\begin{minipage}[t]{.49\textwidth}
+		\tiny Challenge: Class imbalance \par
 		\input{images/partition_histograms.tikz}
 %		\vspace{-4em}\includegraphics[width=.3\textwidth]{images/holl.pdf}
-%	\end{minipage}
-%	\begin{minipage}[t]{.49\textwidth}
-%%		\input{images/partition_histograms.tikz}
-%		\includegraphics[width=.9\textwidth]{images/holl.pdf}
-%	\end{minipage}
+	\end{minipage}
+	\begin{minipage}{.33\textwidth}
+%		\input{images/partition_histograms.tikz}
+		\tiny {\color{tumblue}regions with labels} and \\ {\color{tumorange} location of dataset} \par
+		\includegraphics[width=.9\textwidth]{images/oberfrankenineurope.pdf}
+		 
+		 \tiny partition in {\color{traincolor} train}, {\color{validcolor} validation}, and {\color{evalcolor} evaluation} \par
+		\includegraphics[width=.9\textwidth]{images/holl.pdf}
+	\end{minipage}
 	
 	\end{minipage}
 
@@ -201,6 +244,8 @@
 	
 	\subsection{Losses during Training}
 	
+	\small
+	
 	The combined loss $L_t$, as well as earliness $L_e$ and accuracy $L_e$ losses during training.
 	
 	\input{images/loss-accuracyplots.tikz}
@@ -210,7 +255,7 @@
 	
 	\input{images/trainingstoppingclasses.tikz}
 	
-	\subsection{Balancing Earliness and Accuracy}
+	\subsection{Balancing Earliness and Accuracy} \par
 	\begin{table}
 		
 		\scriptsize
