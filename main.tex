@@ -21,7 +21,7 @@
 	}
 	
 \author{
-	Marc Rußwurm\footnotemark[1], Romain Tavenard\footnotemark[2], Sébastien Lefèvre\footnotemark[2], Marcoa Körner\footnotemark[1]
+	Marc Rußwurm,\footnotemark[1] Romain Tavenard,\footnotemark[2] Sébastien Lefèvre,\footnotemark[2] Marco Körner\footnotemark[1]
 	}
 
 \header{
@@ -156,7 +156,7 @@
 	\node[below=1em of earlinessreward, text width=13cm, xshift=-2em](erewardexp){$\mathcal{R}_e(t, \ycorrect_t) = \ycorrect_t \left(1 - \frac{t}{T}\right)$ \\
 		\vspace{.5em}
 		\tiny
-		reduces loss for earlier classifications $1-\frac{t}{T}$ if the correct class $\ycorrect_t$ has been predicted with a high score \par};
+		reduces loss for earlier classifications $1-\frac{t}{T}$ if the correct class $\ycorrect_t$ has been predicted \par};
 	
 	\draw[thick] (classificationloss) -- (clossexp);
 	\draw[thick] (earlinessreward) -- (erewardexp);
@@ -170,7 +170,7 @@
 	\par
 	}
 
-	
+	\vspace{-1em}
 	\section{Application}
 	
 	\begin{minipage}[t]{.5\textwidth}
@@ -203,17 +203,17 @@
 		\end{itemize}
 	
 	\end{minipage}
-	\begin{minipage}[t]{.66\textwidth}
+	\begin{minipage}[t]{.49\textwidth}
 	\subsection{Dataset and Area of Interest} \par
-	\begin{minipage}{.49\textwidth}
+	\begin{minipage}{.6\textwidth}
 		\small
 		\vspace{1em}
 		Hollfeld region Bavaria
 		\begin{itemize}
 			\item 49k field parcels
 			\item 6 main crop types
-			\item covering 40 by 30 km
-			\item central germany
+			\item covering 40km by 30 km
+			\item central Germany
 		\end{itemize}
 		
 		\vspace{1em}
@@ -222,9 +222,9 @@
 		\input{images/partition_histograms.tikz}
 %		\vspace{-4em}\includegraphics[width=.3\textwidth]{images/holl.pdf}
 	\end{minipage}
-	\begin{minipage}{.33\textwidth}
+	\begin{minipage}{.35\textwidth}
 %		\input{images/partition_histograms.tikz}
-		\tiny {\color{tumblue}regions with labels} and \\ {\color{tumorange} location of dataset} \par
+		\tiny {\color{tumblue}regions with labels} and \\ {\color{tumorange} location of dataset. \par} \par
 		\includegraphics[width=.9\textwidth]{images/oberfrankenineurope.pdf}
 		 
 		 \tiny partition in {\color{traincolor} train}, {\color{validcolor} validation}, and {\color{evalcolor} evaluation} \par
@@ -238,24 +238,28 @@
 \begin{minipage}[t]{.32\textwidth}
 	\section{Results}
 	
-	\subsection{Qualitative Example}
+	\subsection{Qualitative Example} \par
+	{\footnotesize Single example showing reflectance data $\M{x}$ and predictions $\yhat$ along with the stopping time $\tstop \sim \text{Ber}(\deltat)$. \par}
 	
+	\vspace{.5em}
 	\input{images/example.tikz}
+	\vspace{-.5em}
 	
-	\subsection{Losses during Training}
-	
-	\small
-	
-	The combined loss $L_t$, as well as earliness $L_e$ and accuracy $L_e$ losses during training.
-	
+	\subsection{Losses during Training} \par
+	{\footnotesize The combined loss $L_t$, as well as earliness $L_e$ and accuracy $L_e$ losses during training. \par}
+
+	\vspace{.5em}	
 	\input{images/loss-accuracyplots.tikz}
-	\figearlyreward
-	
-	\subsection{Stopping rules learned for each Class}
+	\vspace{-1em}
+
+	\subsection{Stopping Condition Parameterization} \par
+	{\footnotesize Stopping times throughout the training grouped by crop category. The parameterization of early classification is learned for different crop types at different times during training. \par}
 	
 	\input{images/trainingstoppingclasses.tikz}
 	
 	\subsection{Balancing Earliness and Accuracy} \par
+	{\footnotesize Evaluting the effect of the trade-off parameter $\alpha$ on the accuracy and earliness ($\tstop$). Runs repeated three times to evaluated the sability of the results. \par}
+	
 	\begin{table}
 		
 		\scriptsize
@@ -272,7 +276,6 @@
 			\bottomrule
 		\end{tabular}
 	
-		experiments varying the trade-off factor $\alpha$ and observing the achieved earliness and accuracy.
 	
 		%	\caption{Varying the weighting factor $\alpha$ for \emph{early reward} loss formulation (\cref{sec:earlynessreward}).}
 		%	\label{tab:alpha}
@@ -280,19 +283,17 @@
 	\end{table}
 	
 	
-	\subsection{Extracting Vegetation Characteristics}
+	\subsection{Extracting Vegetation Characteristics} \par
 	
-	Stopping time grouped per crop category 
+	{\footnotesize Stopping time per crop category reveals characteristic variations in type of vegetation confirmed by date of harvest (\druschdatum) from local authorities. \par} 
+	\vspace{.5em}
 	\input{images/classboxplots.tikz}
-	
-%	\tiny
-%	\bibliographystyle{icml2019}
-%	\bibliography{bib/references.bib}
-%	
 	
 \end{minipage}
 
+%\frame{
 \begin{footer}
+	
 	\begin{minipage}{.33\textwidth}
 		\textbf{Technical University of Munich}\footnotemark[1]\\
 		TUM Department of Civil, Geo and Env. Engineering \\
@@ -317,8 +318,9 @@
 		\hfill\includegraphics[width=5cm]{images/qr-code}\\
 		
 	\end{minipage}
-	
+
 	
 \end{footer}
+%}
 
 \end{document}

@@ -25,7 +25,7 @@
             /tikz/every even column/.append style={column sep=0.5cm}
         },
         ylabel={\tiny frequency (\%)},
-        symbolic x coords={meadows, summer barley,corn,wheat,winter barley,clover,triticale},
+        symbolic x coords={meadows, s. barley,corn,wheat,w. barley,clover,triticale},
        xtick=data,
        ylabel style={yshift=1cm},
        tick label style={rotate=0},
@@ -37,28 +37,28 @@
     ]
     \addplot [draw=none, fill=traincolor] coordinates {
 (meadows, 49.506024096385545)
-(summer barley, 13.560240963855422)
+(s. barley, 13.560240963855422)
 (corn, 9.632530120481928)
 (wheat, 8.072289156626505)
-(winter barley, 8.05421686746988)
+(w. barley, 8.05421686746988)
 (clover, 7.530120481927711)
 (triticale, 3.644578313253012)
   };
    \addplot [draw=none,fill=validcolor] coordinates {
 (meadows, 49.88550866862938)
-(summer barley, 13.706247955511941)
+(s. barley, 13.706247955511941)
 (corn, 9.846254497873733)
 (wheat, 8.897612037945699)
-(winter barley, 8.27608766764802)
+(w. barley, 8.27608766764802)
 (clover, 6.182531894013739)
 (triticale, 3.205757278377494)
   };
    \addplot [draw=none, fill=evalcolor] coordinates {
 (meadows, 57.32753103801357)
-(summer barley, 11.852041469345961)
+(s. barley, 11.852041469345961)
 (corn, 8.524254447715347)
 (wheat, 6.962754383719442)
-(winter barley, 6.220401894278766)
+(w. barley, 6.220401894278766)
 (clover, 4.876487904774095)
 (triticale, 4.236528862152822)
   };

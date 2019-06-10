@@ -9,7 +9,7 @@
 	solid,
 	draw=black]
 
-\begin{axis}[
+\begin{axis}[thin,
 ytick={1,2,3,4,5,6,7},
 yticklabels={
 	meadows,
@@ -25,11 +25,12 @@ xmax = 1,
 ymin = 1,
 ymax = 8,
 width=20cm,
-height=10cm,
+height=9cm,
 y axis line style={draw=none},
 xtick={0,0.1666666667,0.4166666667,0.6666666667,0.9166666667},
 xticklabels={January,March,June,September,December},
-xlabel={stopping date $\tstop$}
+xlabel={stopping date $\tstop$},
+xlabel style={yshift=-.5em},
 ]
 
 
@@ -38,7 +39,7 @@ xlabel={stopping date $\tstop$}
 \draw [fill=tumbluelight, opacity=.4, draw=none] (axis cs:0.1666666667,0) rectangle (axis cs:0.5833333333,8);
 \draw[draw=tumgraydark] (axis cs:0.5833333333,0) -- (axis cs:0.5833333333,8);
 
-\node[font=\tiny\sffamily] at (axis cs:0.37,8.2){vegetative season};
+\node[font=\tiny\sffamily] at (axis cs:0.37,8.4){vegetative season};
 
 %\node[font=\tiny\sffamily] at (axis cs:0.8,8.2){b};
 
